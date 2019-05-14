@@ -5,10 +5,9 @@ module.exports = (bot) => {
 
   bot.on('message', (msg) => {
     if (msg.text)
-      console.log(msg.from.username, 'on', msg.chat.id, ':', msg.text)
+      console.log(msg.from.username || 'Anonymous', 'on', msg.chat.title, ':', msg.text)
 
     if (msg.sticker)
-      console.log('Sticker from:', msg.from.username, msg.sticker.file_id)
+      console.log(msg.from.username || 'Anonymous', 'on', 'sticker', msg.chat.title, ':', msg.sticker.file_id)
   })
-
 }

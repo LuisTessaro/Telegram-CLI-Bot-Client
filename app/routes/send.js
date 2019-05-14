@@ -1,11 +1,13 @@
 const parseMsg = require('../helpers/parseMsg')
 const chatParser = require('../helpers/chatParser')
+const stickerParser = require('../helpers/stickerParser')
+
 const readline = require('readline').createInterface({
   input: process.stdin,
   output: process.stdout
 })
 
-let currentChat = -203726056
+let currentChat = -140082192
 
 module.exports = (bot) => {
   readLine(bot)
@@ -22,11 +24,10 @@ function readLine(bot) {
           bot.sendPhoto(currentChat, message.msg);
       }
       if (message.type == 'sticker') {
-
         if (message.msg == ' ')
           console.log('invalid path')
         else
-          bot.sendSticker(currentChat, message.msg)
+          bot.sendSticker(currentChat, stickerParser.parseNameToId(message.msg))
       }
 
       if (message.type == 'chatlist') {
@@ -34,7 +35,11 @@ function readLine(bot) {
       }
 
       if (message.type == 'chat') {
-        currentChat = message.msg
+        currentChat = chatParser.parseNameToId(message.msg)
+      }
+
+      if (message.type == 'addchat') {
+        chatParser.addNewChat(message.msg)
       }
     }
     else {
