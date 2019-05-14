@@ -8,6 +8,6 @@ module.exports = (bot) => {
       console.log(msg.from.username || 'Anonymous', 'on', msg.chat.title, ':', msg.text)
 
     if (msg.sticker)
-      console.log(msg.from.username || 'Anonymous', 'on', 'sticker', msg.chat.title, ':', msg.sticker.file_id)
+      console.log(msg.from.username || 'Anonymous', 'on', 'sticker', msg.chat.title, ':', msg.sticker.emoji, '/packName:', msg.sticker.set_name)
   })
 }
