@@ -4,7 +4,7 @@ module.exports = (msg) => {
     return {
       cmd: true,
       type: initialParse[1],
-      msg: initialParse[2].toString()
+      msg: initialParse[2] || ' '
     }
   }
   else return {

@@ -1,31 +1,47 @@
 const parseMsg = require('../helpers/parseMsg')
+const chatParser = require('../helpers/chatParser')
+const readline = require('readline').createInterface({
+  input: process.stdin,
+  output: process.stdout
+})
+
+let currentChat = -203726056
 
 module.exports = (bot) => {
-  const chatIdConf = -140082192
-  const chatIdTestes = -203726056
+  readLine(bot)
+}
 
-  const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-  })
-
-  readLine()
-
-  function readLine() {
-    readline.question(``, (msg) => {
-      const message = parseMsg(msg)
-      if (message.cmd) {
-        if (message.type == 'img') {
-          bot.sendPhoto(chatIdTestes, message.msg);
-        }
-        if (message.type == 'sticker') {
-          bot.sendSticker(chatIdTestes, message.msg)
-        }
+function readLine(bot) {
+  readline.question(``, (msg) => {
+    const message = parseMsg(msg)
+    if (message.cmd) {
+      if (message.type == 'img') {
+        if (message.msg == ' ')
+          console.log('invalid path')
+        else
+          bot.sendPhoto(currentChat, message.msg);
       }
-      else
-        if (message.msg)
-          bot.sendMessage(chatIdTestes, message.msg)
-      readLine()
-    })
-  }
+      if (message.type == 'sticker') {
+
+        if (message.msg == ' ')
+          console.log('invalid path')
+        else
+          bot.sendSticker(currentChat, message.msg)
+      }
+
+      if (message.type == 'chatlist') {
+        chatParser.listAllChats()
+      }
+
+      if (message.type == 'chat') {
+        currentChat = message.msg
+      }
+    }
+    else {
+      if (message.msg) {
+        bot.sendMessage(currentChat, message.msg)
+      }
+    }
+    readLine(bot)
+  })
 }
