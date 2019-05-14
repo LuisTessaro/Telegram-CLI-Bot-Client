@@ -1,4 +1,4 @@
-app
+app/configs
 app/data
 package-lock.json
 node_modules
