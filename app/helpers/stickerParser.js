@@ -30,3 +30,4 @@ function listAllStickers() {
 }
 
 module.exports.parseNameToId = parseNameToId
+module.exports.listAllStickers = listAllStickers

@@ -34,12 +34,29 @@ function readLine(bot) {
         chatParser.listAllChats()
       }
 
+      if (message.type == 'stickerlist') {
+        stickerParser.listAllStickers()
+      }
+
       if (message.type == 'chat') {
         currentChat = chatParser.parseNameToId(message.msg)
       }
 
       if (message.type == 'addchat') {
         chatParser.addNewChat(message.msg)
+      }
+
+      if (message.type == 'help') {
+        console.log(
+          `
+          img path
+          sticker name
+          stickerlist
+          chatlist
+          chat chatname
+          addchat chatname chatid chatdescription
+          `
+        )
       }
     }
     else {
