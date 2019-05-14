@@ -10,6 +10,15 @@ function parseNameToId(name) {
   return id
 }
 
+function idToName(id) {
+  let name = ''
+  Object.keys(stickers).find(key => {
+    if (stickers[key].id === id)
+      name = key
+  })
+  return name
+}
+
 function addNewSticker(sticker) {
   const chatParsed = chat.split(' ')
   const name = chatParsed[0] || 'Chat'
@@ -31,3 +40,4 @@ function listAllStickers() {
 
 module.exports.parseNameToId = parseNameToId
 module.exports.listAllStickers = listAllStickers
+module.exports.idToName = idToName
