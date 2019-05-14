@@ -1,5 +1,6 @@
-app/configs
-app/data
+
 package-lock.json
 node_modules
 app/configs/config.js
+app/conf
+app/data
