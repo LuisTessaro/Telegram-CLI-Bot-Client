@@ -1,29 +1,31 @@
 const parseMsg = require('../helpers/parseMsg')
 
-const readline = require('readline').createInterface({
-  input: process.stdin,
-  output: process.stdout
-})
-
-
 module.exports = (bot) => {
-  readLine(bot)
-}
+  const chatIdConf = -140082192
+  const chatIdTestes = -203726056
 
-function readLine(bot) {
-  readline.question(``, (msg) => {
-    const message = parseMsg(msg)
-    if (message.cmd) {
-      if (message.type == 'img') {
-        bot.sendPhoto(chatId, message.msg);
-      }
-      if (message.type == 'sticker') {
-        bot.sendSticker(chatId, message.msg)
-      }
-    }
-    else
-      if (message.msg)
-        bot.sendMessage(chatId, message.msg)
-    readLine()
+  const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout
   })
+
+  readLine()
+
+  function readLine() {
+    readline.question(``, (msg) => {
+      const message = parseMsg(msg)
+      if (message.cmd) {
+        if (message.type == 'img') {
+          bot.sendPhoto(chatIdTestes, message.msg);
+        }
+        if (message.type == 'sticker') {
+          bot.sendSticker(chatIdTestes, message.msg)
+        }
+      }
+      else
+        if (message.msg)
+          bot.sendMessage(chatIdTestes, message.msg)
+      readLine()
+    })
+  }
 }
